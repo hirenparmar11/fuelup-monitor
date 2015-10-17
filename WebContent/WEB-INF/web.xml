@@ -28,6 +28,6 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>fuelup-core</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/rest</url-pattern>
 	</servlet-mapping>
 </web-app>

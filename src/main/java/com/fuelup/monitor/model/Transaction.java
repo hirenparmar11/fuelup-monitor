@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -22,7 +23,7 @@ public class Transaction {
 
 	@Id
 	@Column(name="TRANSACTION_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long transactionID;
 	
 	@Column(name="TRANSACTION_DATE")
@@ -43,7 +44,8 @@ public class Transaction {
 	@Column(name="CC_USER")
 	private String ccUsed;
 	
-	private Object receipt;
+	@Lob
+	private byte[] receipt;
 	
 	@Column(name="LAST_UPDATED_TIME")
 	private Date lastUpdatedTime;
@@ -99,7 +101,7 @@ public class Transaction {
 	public Object getReceipt() {
 		return receipt;
 	}
-	public void setReceipt(Object receipt) {
+	public void setReceipt(byte[] receipt) {
 		this.receipt = receipt;
 	}
 	public Date getLastUpdatedTime() {
