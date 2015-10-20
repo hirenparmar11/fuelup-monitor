@@ -6,50 +6,76 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.fuelup.monitor.model.Transaction;
+import com.fuelup.monitor.models.Transaction;
 
 @Repository
 public class TransactionDAO {
-	
+
 	@PersistenceContext
-	EntityManager entityManager;
+	private EntityManager entityManager;
+	
+	@Transactional
+	public Transaction create(Transaction transaction) {
 
-	public List<Transaction> fetchAllTransactions() {
-		List<Transaction> transactions = entityManager.createNamedQuery("fetchAllTrx", Transaction.class).getResultList();
-		return transactions;
+		if(transaction != null) {
+			entityManager.persist(transaction);
+			return findByID(transaction.getTransactionID());
+		} else {
+			return null;
+		}
 	}
 	
-	public Transaction fetchTransaction(Long transactionId) {
-		return entityManager.find(Transaction.class, transactionId);
+	@Transactional
+	public Transaction modify(Long transactionID, Transaction transaction) {
+
+		Transaction staleTransaction = entityManager.find(Transaction.class, transactionID);
+		if(transaction != null && staleTransaction != null) {
+			staleTransaction.setTransactionDate(transaction.getTransactionDate());
+			staleTransaction.setCostPerGallon(transaction.getCostPerGallon());
+			staleTransaction.setGallons(transaction.getGallons());
+			staleTransaction.setMileage(transaction.getMileage());
+			staleTransaction.setNotes(transaction.getNotes());
+			staleTransaction.setTotalCost(transaction.getTotalCost());
+			staleTransaction.setCcUsed(transaction.getCcUsed());
+			return staleTransaction;
+		}  else {
+			return null;
+		}
 	}
 	
-	public Transaction createTransaction(Transaction transaction) {
-		entityManager.persist(transaction);
-		return fetchTransaction(transaction.getTransactionID());
-	}
-
-	public Transaction deleteTransaction(Long transactionId) {
-		Transaction transaction = fetchTransaction(transactionId);
-		entityManager.remove(transaction);
+	@Transactional
+	public Transaction remove(Long transactionID) {
 		
-		if(fetchTransaction(transactionId) == null) {
-			return transaction;
+		if(transactionID !=null && transactionID > 0) {
+			Transaction deletedTransaction = findByID(transactionID);
+			if(deletedTransaction != null && entityManager.contains(deletedTransaction)) {
+				entityManager.remove(entityManager.merge(deletedTransaction));
+				if(findByID(transactionID) == null) {
+					return deletedTransaction;
+				} else {
+					return null;
+				}
+			} else {
+				return null;
+			}
 		} else {
 			return null;
 		}
 
 	}
-
-	public Transaction modifyTransaction(Long transactionId, Transaction transaction) {
-		entityManager.refresh(transaction);
+	
+	public Transaction findByID(Long transactionID) {
 		
-		if(fetchTransaction(transactionId) == null) {
-			return null;
-		} else if(fetchTransaction(transactionId).equals(transaction)) {
-			return transaction;
+		if(transactionID !=null && transactionID > 0) {
+			return entityManager.find(Transaction.class, transactionID);
 		} else {
 			return null;
 		}
+	}
+	
+	public List<Transaction> findAll() {
+		return entityManager.createNamedQuery("findAll", Transaction.class).getResultList();
 	}
 }
