@@ -14,21 +14,21 @@ public class TransationApp {
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
 		
 		Transaction transaction = new Transaction();
-		transaction.setTransactionID(1L);
+//		transaction.setTransactionID(1L);
 		transaction.setTransactionDate(new Date());
-//		transaction.setNotes("test note");
-		transaction.setNotes("test note- modified");
+		transaction.setNotes("test note");
+//		transaction.setNotes("test note- modified");
 //		transaction.setNotes("test note- deleted and created");
 		transaction.setGallons(10.00d);
 		transaction.setCostPerGallon(2.50d);
-		transaction.setMileage(13000l);
+		transaction.setMileage(13400l);
 		transaction.setTotalCost(25.00d);
 		transaction.setCcUsed("BofA DC");
 		transaction.setLastUpdatedTime(new Date());
 		
 		TransactionDAO transactionDAO = context.getBean(TransactionDAO.class);
-//		transactionDAO.create(transaction);
-		transactionDAO.modify(1L, transaction);
+		transactionDAO.create(transaction);
+//		transactionDAO.modify(1L, transaction);
 //		transactionDAO.remove(2L);
 		transactionDAO.findAll();
 	}
