@@ -4,7 +4,7 @@
   <artifactId>fuelup-monitor</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>fuelup-test</name>
+  <name>fuelup-monitor</name>
   <build>
     <plugins>
       <plugin>
