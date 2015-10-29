@@ -12,6 +12,9 @@
     http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     
     <context:component-scan base-package="com.fuelup.monitor"/>
+    
+    <mvc:resources mapping="/app/**" location="/app/build/"/>
+    
     <mvc:annotation-driven/>
     
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
