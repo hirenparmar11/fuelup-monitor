@@ -1,0 +1,44 @@
+                <h1>Hello world! View page</h1>
+                                
+                <table class="table">
+                    <tr>
+                        <td title="'Action'" class="col-md-8">
+                            <!--transaction.transactionID -->
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-default" href="#/">All Transactions</a>
+                                <a class="btn btn-default" href="#/view/{{transaction.transactionID}}">View</a> <!--
+                                <a class="btn btn-default">Delete</a> -->
+                            </div>
+                        </td>
+                    </tr>
+                        <!-- filter="{ notes: 'text'}" sortable="'notes'" 
+                        filter="{ gallons: 'number'}" sortable="'gallons'"-->
+                    <tr>
+                        <td> Transaction Date </td>
+                        <td> <input class="form-control" type='text' value='{{transaction.transactionDate}}'/> </td>
+                    </tr>
+                    <tr>
+                        <td> Notes </td>
+                        <td> <input class="form-control" type='text' value='{{transaction.notes}}'/> </td>
+                    </tr>
+                    <tr>
+                        <td> Gallons </td>
+                        <td> <input class="form-control" type='text' value='{{transaction.gallons}}'/> </td>
+                    </tr>
+                    <tr>
+                        <td> Cost Per Gallon </td>
+                        <td> <input class="form-control" type='text' value='{{transaction.costPerGallon}}'/></td>
+                    </tr>
+                    <tr>
+                        <td> Total Cost </td>
+                        <td> <input class="form-control" type='text' value='{{transaction.totalCost}}'/></td>
+                    </tr>
+                    <tr>                     
+                        <td> Mileage </td>
+                        <td> <input class="form-control" type='text' value='{{transaction.mileage}}'/></td>
+                    </tr>
+                    <tr>
+                        <td> Payment Method </td>
+                        <td> <input class="form-control" type='text' value='{{transaction.ccUsed}}'/></td>
+                    </tr>
+                </table>

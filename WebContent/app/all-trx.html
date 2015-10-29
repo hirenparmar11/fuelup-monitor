@@ -1,0 +1,27 @@
+<!-- <div ng-controller="allTrxController"> -->
+                
+                <h1>Hello world!</h1>
+                                
+                <table ng-table="transactions" class="table" show-filter="true">
+                    <tr ng-repeat="transaction in transactions">
+                        <td title="'Action'" class="col-md-2">
+                            <!--transaction.transactionID -->
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-default" href="#/view/{{transaction.transactionID}}">View</a>
+                                <a class="btn btn-default" href="#/edit/{{transaction.transactionID}}">Edit</a>
+                                <a class="btn btn-default">Delete</a>
+                            </div>
+                        </td>
+                        <!-- filter="{ notes: 'text'}" sortable="'notes'" 
+                        filter="{ gallons: 'number'}" sortable="'gallons'"-->
+                        <td title="'Date'"><label>{{transaction.transactionDate}}</label></td>
+                        <td title="'Notes'"><label>{{transaction.notes}}</label></td>
+                        <td title="'Gallons'"><label>{{transaction.gallons}}</label></td>
+                        <td title="'Cost Per Gallon'"><label>{{transaction.costPerGallon}}</label></td>
+                        <td title="'Total Cost'"><label>{{transaction.totalCost}}</label></td>
+                        <td title="'Mileage'"><label>{{transaction.mileage}}</label></td>
+                        <td title="'Payment Method'"><label>{{transaction.ccUsed}}</label></td>
+
+                    </tr>
+                </table>
+            <!-- </div> -->
